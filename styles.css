@@ -1,0 +1,39 @@
+a {
+    color:rgb(99, 101, 140);
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+img{
+    margin-right: 20px;
+}
+
+a:hover{
+    color:rgb(82, 84, 115);
+    text-decoration: none;
+}
+
+.profil-title{
+    background-color:lightblue;
+}
+
+body{
+    background-image: url("https://www.thoughtco.com/thmb/rK99oOSfZf8O4r5ho479kSxpA5c=/2330x2210/filters:no_upscale():max_bytes(150000):strip_icc()/futLeelaNFry-57a96d0b3df78cf459bd821e.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+.donnes{
+    font-size: 10em;
+    display: inline-block;
+    width: 400px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: lightblue;
+    color: yellow;
+}
+
+
+
+
+
