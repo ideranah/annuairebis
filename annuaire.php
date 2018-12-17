@@ -1,7 +1,7 @@
 <?php
 require ('connexion.php');
 $appliDB = new Connexion();
-$personnes = $appliDB->getPersonnes();
+$personnes = $appliDB->getPerson();
 
 ?>
 
@@ -54,9 +54,9 @@ $personnes = $appliDB->getPersonnes();
         <?php
             foreach($personnes as $personne){
                echo '<li class="list-group-item">
-                <a class="link-profil" href="profile.php?id='. $personne->Id .'">
+                <a class="link-profil" href="profile.php?id='. $personne->id .'">
                 <img src="https://avatarfiles.alphacoders.com/547/54795.jpg" width="50" height="50" alt="">'.
-                $personne->Nom.' '.$personne->Prenom.'
+                $personne->first_name.' '.$personne->last_name.'
                 </a>
                 </li>';
             }

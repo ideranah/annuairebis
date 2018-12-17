@@ -1,7 +1,9 @@
 <?php
     require ('connexion.php');
     $appliDB = new Connexion();
-    $personnes = $appliDB->getPersonnes();
+    $personnes = $appliDB->getPerson();
+    $hobbys=$appliDB->getHobbies();
+    $musiques=$appliDB->getMusic();
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +41,7 @@
         </div>
     </nav>
 
-    <form>
+    <form action="minifacebook.php" method="POST" >
         <div class="container-small border shadow-lg p-3 mb-5 bg-white rounded float-left">
             <h1 class="row justify-content-center">INSCRIPTION</h1>
             <div class="row justify-content-center mb-3">
@@ -48,8 +50,12 @@
                 </div>
                 <div class="col-4">
                     <input type="text" class="form-control" placeholder="Prénom" name="prenom">
+                </div>
+
+                <div class="col-8 mt-3">
+                    <input type="text" class="form-control" placeholder="Url Photo" name="urlphoto">
+                </div>
             </div>
-        </div>
         <div class="row justify-content-center mb-3">
             <div class="col-4 text-right">
                 <label for="date">Date de naissance : </label>
@@ -60,12 +66,12 @@
         </div>
         <div class="row justify-content-center mb-3">
             <div class="col-7">
-                    <label for="homme">Homme</label>
-                    <input class="mr-3" name="sexe" type="radio" id="homme">
-                    <label for="femme">Femme</label>
-                    <input class="mr-3" name="sexe" type="radio" id="femme">
+                    <label for="homme">Marié</label>
+                    <input class="mr-3" name="civilite" type="radio" id="homme" value="marie">
+                    <label for="femme">Celibataire</label>
+                    <input class="mr-3" name="civilite" type="radio" id="femme" value="celibataire">
                     <label for="nonrens">Non renseigné</label>
-                    <input class="" name="sexe" type="radio" id="nonrens">
+                    <input class="" name="civilite" type="radio" id="nonrens" value="non renseigne">
                 </div>
         </div>
         <div class="row justify-content-center mb-3">
@@ -73,9 +79,11 @@
                     <label>Hobies : </label>
                 </div>
                 <div class="col-3">
-                    <label class=""><input class="mr-1" type="checkbox" name="Earth">Earth</label>
-                    <label class=""><input class="mr-1" type="checkbox" name="Wind">Wind</label>
-                    <label class=""><input class="mr-1" type="checkbox" name="Fire">Fire</label>
+                    <?php
+                    foreach($hobbys as $hobby){
+                        echo '<label class=""><input class="mr-1" type="checkbox" name="hobby[]" value="'.$hobby->id.'">'.$hobby->type.'</label>';
+                    }
+                    ?>
                 </div>
             </div>
         <div class="row justify-content-center mb-3">
@@ -83,12 +91,13 @@
                     <label>Music : </label>
                 </div>
                 <div class="col-3">
-                    <label class=""><input class="mr-1" type="checkbox">Classic</label>
-                    <label class=""><input class="mr-1" type="checkbox">Jazz</label>
-                    <label class=""><input class="mr-1" type="checkbox">Rock</label>
-                    <label class=""><input class="mr-1" type="checkbox">Electronic</label>
-                    <label class=""><input class="mr-1" type="checkbox">Folk</label>
-                    <label class=""><input class="mr-1" type="checkbox">Reggae</label>
+
+                    <?php
+                        foreach($musiques as $musique){
+                            echo '<label class=""><input class="mr-1" type="checkbox" name="musique[]" value="'.$musique->id.'">'.$musique->type.'</label>';
+                        }
+                    ?>
+               
                 </div>
             </div>
         <div class="row justify-content-center mb-3">
@@ -110,14 +119,13 @@
                         </li>
 
                         <?php
-
                         foreach($personnes as $personne){
                             echo '<li class="list-group-item">
-                            <a class="link-profil" href="profile.php?id='. $personne->Id .'">
+                            <a class="link-profil" href="profile.php?id='. $personne->id .'">
                             <img src="https://avatarfiles.alphacoders.com/547/54795.jpg" width="50" height="50" alt="">
-                            '.$personne->Nom.' '.$personne->Prenom.'
+                            '.$personne->last_name.' '.$personne->first_name.'
                             </a>
-                            <select name="relation" class="float-right ml-5">
+                            <select name="relation['.$personne->id.']" class="float-right ml-5">
                             <option value="">Aucune relation</option>
                             <option value="ami">Ami</option>
                             <option value="famille">Famille</option>

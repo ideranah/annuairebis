@@ -39,7 +39,7 @@ class Connexion {
             
         public function getHobbies(){
         
-            $requete_prepare =$this->connexion->prepare("SELECT type FROM hobby");
+            $requete_prepare =$this->connexion->prepare("SELECT * FROM hobby");
         
             $requete_prepare->execute();
             
@@ -48,10 +48,15 @@ class Connexion {
             return $resultat;   
         }
 
-        public function setPersonneHobby($personneId, $hobbyId){
-            $requete_prepare =$this->connexion->prepare("INSERT INTO relation_hobby (person_id,hobby_id) values(:personneId,:hobbyId)");
+        public function setPersonHobby($personneId, $hobbyId){
+            $requete_prepare =$this->connexion->prepare("INSERT INTO person_hobby (person_id,hobby_id) values(:personneId,:hobbyId)");
             return $requete_prepare->execute(array('personneId'=>$personneId,'hobbyId'=>$hobbyId));
 
+        }
+
+        public function setPersonMusic($personneId,$musiquesId){
+            $requete_prepare = $this->connexion->prepare("INSERT INTO person_music (person_id,music_id) values(:personneId,:musiqueId)");
+            return $requete_prepare->execute(array('personneId'=>$personneId,'musiqueId'=>$musiquesId));
         }
 
         public function setMusic(string $style){
@@ -72,7 +77,7 @@ class Connexion {
                     
         public function getMusic(){
             
-            $requete_prepare = $this->connexion->prepare("SELECT type FROM music");
+            $requete_prepare = $this->connexion->prepare("SELECT * FROM music");
                 
             $requete_prepare->execute();
                 
@@ -81,13 +86,13 @@ class Connexion {
             return $resultat; 
         }
         
-        public function setPerson($nom, $prenom, $urlPhoto, $dateNaissance,$genre, $status){
+        public function setPerson($nom, $prenom, $urlPhoto, $dateNaissance, $status){
                         
             $requete_prepare = $this->connexion->prepare(
-                "INSERT INTO person (last_name,first_name,photo_url,birthday,gender,marital_status) values (:nom,:prenom,:url_photo,:date_naissance,:genre,:status_couple)");
+                "INSERT INTO person (last_name,first_name,photo_url,birthday,marital_status) values (:nom,:prenom,:url_photo,:date_naissance,:status_couple)");
                 
             $requete_prepare->execute(
-                array('nom' => "$nom",'prenom' => "$prenom",'url_photo' => "$urlPhoto",'date_naissance' => "$dateNaissance",'genre'=>"$genre",'status_couple' => "$status"));
+                array('nom' => "$nom",'prenom' => "$prenom",'url_photo' => "$urlPhoto",'date_naissance' => "$dateNaissance",'status_couple' => "$status"));
     
             }
         
@@ -125,14 +130,14 @@ class Connexion {
 
             $resultat=$requete_prepare->fetchAll(PDO::FETCH_OBJ);
         
-        return $resultat;
+            return $resultat;
         }
 
 
         public function getPersonHobby(int $personneId){
 
             $requete_prepare = $this->connexion->prepare(
-                "SELECT Type FROM person_hobby
+                "SELECT type FROM person_hobby
                 INNER JOIN hobby ON hobby_id = id
                 WHERE person_id = :id");
 
@@ -148,7 +153,7 @@ class Connexion {
          public function getPersonMusic($personneId){
 
             $requete_prepare = $this->connexion->prepare(
-                "SELECT Type FROM person_music
+                "SELECT type FROM person_music
                 INNER JOIN music ON music_id = id
                 WHERE person_id = :id");
 
@@ -160,6 +165,13 @@ class Connexion {
             return $musiques;
             
         }
+
+
+        public function setPersonRelation($personId,$relationId,$relationType){
+            $requete_prepare = $this->connexion->prepare("INSERT INTO person_relation (person_id,relation_id,relation_type) values (:personId,:relationId,:relationType)");
+            $requete_prepare->execute(array("personId"=>$personId, "relationId"=>$relationId, "relationType"=>$relationType));
+        }
+
 
         public function getPersonRelation($personneId){
             

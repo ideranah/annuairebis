@@ -2,10 +2,10 @@
 <?php
     require ('connexion.php');
     $appliDB = new Connexion();
-    $personne=$appliDB->getPersonneById($_GET["id"]);
-    $hobbiesById=$appliDB->getPersonneHobby($_GET["id"]);
-    $relationsById=$appliDB->getRelationPersonne($_GET["id"]);
-    $musiqueById=$appliDB->getPersonneMusique($_GET["id"]);
+    $personne=$appliDB->getPersonById($_GET["id"]);
+    $hobbiesById=$appliDB->getPersonHobby($_GET["id"]);
+    $relationsById=$appliDB->getPersonRelation($_GET["id"]);
+    $musiqueById=$appliDB->getPersonMusic($_GET["id"]);
 
 ?>
 <!DOCTYPE html>
@@ -47,15 +47,15 @@
     <div class="container ">
         <div class="container-medium border shadow-lg p-3 mb-5 bg-white rounded">
             <div class="row justify-content-center">
-                <img class="rounded-circle" src="https://pbs.twimg.com/profile_images/817411634113040385/x3omzI6x_400x400.jpg"
+                <img class="rounded-circle" src="<?php echo $personne->photo_url?>"
                     alt="">
             </div>
             <div class="container border shadow-lg p-3 bg-white rounded float-righ mt-5">
                 <h4 class="genremusical row justify-content-center">Donnes personnelles</h4>
-                <div class="nom row justify-content-center"><?php echo $personne->Prenom ?></div>
-                <div class="prenom row justify-content-center"><?php echo $personne->Nom ?></div>
-                <div class="datenaissance row justify-content-center"><?php echo $personne->Date_Naissance ?></div>
-                <div class="statut row justify-content-center"><?php echo $personne->Statut_couple ?></div>
+                <div class="nom row justify-content-center"><?php echo $personne->first_name ?></div>
+                <div class="prenom row justify-content-center"><?php echo $personne->last_name ?></div>
+                <div class="datenaissance row justify-content-center"><?php echo $personne->birthday ?></div>
+                <div class="statut row justify-content-center"><?php echo $personne->marital_status ?></div>
             </div>
 
             <div class="container-medium border shadow-lg p-3 mb-5 mt-5 bg-white rounded">
@@ -63,7 +63,7 @@
                 <?php
                     foreach($musiqueById as $musique){
 
-                        echo '<div class="genre">'.$musique->Type.'</div>';
+                        echo '<div class="genre">'.$musique->type.'</div>';
                     }
                 ?>
             </div>
@@ -73,7 +73,7 @@
                 <?php
                     foreach($hobbiesById as $hobbie){
 
-                        echo '<div class="genre">'.$hobbie->Type.'</div>';
+                        echo '<div class="genre">'.$hobbie->type.'</div>';
 
                     }
                 ?>
@@ -92,9 +92,9 @@
                 foreach($relationsById as $relation){
 
                 echo '<li class="list-group-item">
-                     <a class="link-profil" href="profile.php?id='.$relation->Id.'">
+                     <a class="link-profil" href="profile.php?id='.$relation->id.'">
                      <img src="https://avatarfiles.alphacoders.com/547/54795.jpg" width="50" height="50" alt="">
-                     '.$relation->Nom.' '.$relation->Prenom.'
+                     '.$relation->first_name.' '.$relation->last_name.' '.$relation->relation_type.'
                      </a>
                      </li>';
                 }

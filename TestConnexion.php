@@ -2,6 +2,7 @@
 require ('connexion.php');
 /* $conn=connexionBD();
 
+$insertMusique = insertMusique("National Antheme");
 
     
 if($conn != NULL){
@@ -18,7 +19,6 @@ $hobbies = selectAllHobbies();
 foreach ($hobbies as $hobbie)
 echo '<Input type="checkbox">'.$hobbie->Type.'</Input>'; 
 
-$insertMusique = insertMusique("National Antheme");
 
 if($insertMusique === true){
     echo "Insertion OK<br/>";
@@ -56,15 +56,15 @@ $appliDB = new Connexion();
 
 //$appliDB->setHobby("Ice");
 
-$hobbies = $appliDB->getHobbies();
+/* $hobbies = $appliDB->getHobbies();
 
 foreach ($hobbies as $hobbie)
-echo '<Input type="checkbox">'.$hobbie->type.'</Input>';
+echo '<Input type="checkbox">'.$hobbie->type.'</Input>'; */
 
 
-//$appliDB->setMusic("Jazz");
+//$appliDB->setMusic("Electronic");
 
-echo $appliDB->getLastId();
+//echo $appliDB->getLastId();
 
 
 
@@ -72,7 +72,7 @@ echo $appliDB->getLastId();
 
 
  
-//$appliDB->setPersonne("Jonathan", "Dubosque", "https:/www.google.com/maskass/","2014/07/07","Sagitaire");
+//$appliDB->setPerson("Jonathan", "Dubosque", "https:/www.google.com/maskass/","2014/07/07","Sagitaire");
 //$appliDB->setPersonne("Jorge", "SanJose-Delaroya-Pinto", "https:/www.google.com/maskass/","2014/07/07","Canard laqué");
 
 /* $hobbiesById=$appliDB->getPersonneHobby(1);
