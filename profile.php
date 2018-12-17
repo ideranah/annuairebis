@@ -58,18 +58,18 @@
                 <div class="statut row justify-content-center"><?php echo $personne->marital_status ?></div>
             </div>
 
-            <div class="container-medium border shadow-lg p-3 mb-5 mt-5 bg-white rounded">
-                <h4 class="genremusical row justify-content-center">Genre de musique</h4>
+            <ul class="list-group container border shadow-lg p-3 mb-5 bg-white rounded">
+                <li class="list-group-item profil-title">GENRE DE MUSIQUE</li>
                 <?php
                     foreach($musiqueById as $musique){
 
                         echo '<div class="genre">'.$musique->type.'</div>';
                     }
                 ?>
-            </div>
+            </ul>
 
-            <div class="container-medium border shadow-lg p-3 mb-5 mt-5 bg-white rounded">
-                <h4 class="genremusical row justify-content-center">Hobbies</h4>
+            <ul class="list-group container border shadow-lg p-3 mb-5 bg-white rounded">
+                <li class="list-group-item profil-title">Hobbies</li>
                 <?php
                     foreach($hobbiesById as $hobbie){
 
@@ -78,14 +78,12 @@
                     }
                 ?>
 
-            </div>
+            </ul>
 
 
             <ul class="list-group container border shadow-lg p-3 mb-5 bg-white rounded">
                 <li class="list-group-item profil-title">
-                    <a class="" href="profile.html">
                         LISTE DES AMIS
-                    </a>
                 </li>
 
                 <?php
