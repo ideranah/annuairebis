@@ -41,7 +41,7 @@
         </div>
     </nav>
 
-    <form action="minifacebook.php" method="POST" >
+    <form action="minifacebook.php" method="POST" enctype="multipart/form-data" >
         <div class="container-small border shadow-lg p-3 mb-5 bg-white rounded float-left">
             <h1 class="row justify-content-center">INSCRIPTION</h1>
             <div class="row justify-content-center mb-3">
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="col-8 mt-3">
-                    <input type="text" class="form-control" placeholder="Url Photo" name="urlphoto">
+                    <input type="file"" class="form-control" placeholder="Photo" name="fileToUpload" id="fileToUpload">
                 </div>
             </div>
         <div class="row justify-content-center mb-3">
